@@ -42,6 +42,72 @@ const testimonials = [
   "A beautiful reminder that love needs attention, patience, and wisdom.",
 ];
 
+const floatingDecor = [
+  { icon: Heart, className: "left-[6%] top-24", delay: 0 },
+  { icon: Sparkles, className: "left-[18%] top-[60%]", delay: 0.7 },
+  { icon: Heart, className: "right-[8%] top-32", delay: 1.1 },
+  { icon: Sparkles, className: "right-[18%] bottom-28", delay: 1.5 },
+  { icon: Heart, className: "left-[45%] bottom-16", delay: 2 },
+];
+
+function FloatingRomanceBackground() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {floatingDecor.map((item, index) => {
+        const Icon = item.icon;
+
+        return (
+          <motion.div
+            key={index}
+            className={`absolute hidden rounded-full border border-[#FADADD]/70 bg-white/50 p-3 text-[#B73E5A] shadow-lg shadow-[#FADADD]/30 backdrop-blur-sm sm:block ${item.className}`}
+            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            animate={{
+              opacity: [0.25, 0.8, 0.25],
+              y: [0, -22, 0],
+              rotate: [0, 8, -5, 0],
+              scale: [0.9, 1.08, 0.9],
+            }}
+            transition={{
+              duration: 6,
+              delay: item.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Icon size={18} fill="currentColor" />
+          </motion.div>
+        );
+      })}
+
+      <motion.div
+        className="absolute left-1/2 top-10 h-32 w-32 rounded-full bg-[#FADADD]/30 blur-3xl"
+        animate={{
+          scale: [1, 1.35, 1],
+          opacity: [0.4, 0.85, 0.4],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-12 right-1/4 h-40 w-40 rounded-full bg-[#E8A1B3]/25 blur-3xl"
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.35, 0.7, 0.35],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <Layout>
@@ -49,6 +115,7 @@ export default function Home() {
       <section className="relative overflow-hidden px-5 py-20 lg:py-28">
         <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-[#FADADD]/50 blur-3xl" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#E8A1B3]/40 blur-3xl" />
+        <FloatingRomanceBackground />
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
@@ -57,7 +124,15 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="order-1 flex justify-center lg:order-1"
           >
-            <div className="relative w-full max-w-sm">
+            <motion.div
+              className="relative w-full max-w-sm"
+              animate={{ y: [0, -10, 0] }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               <div className="absolute inset-0 rounded-[2rem] bg-[#7A1F3D]/20 blur-3xl" />
 
               <div className="relative rounded-[2rem] border border-[#FADADD] bg-white p-4 shadow-2xl">
@@ -67,7 +142,7 @@ export default function Home() {
                   className="aspect-[3/4] w-full rounded-[1.5rem] object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -76,9 +151,23 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="order-2 lg:order-2"
           >
-            <div className="mb-6 inline-flex rounded-full border border-[#FADADD] bg-white/70 px-5 py-2 text-sm font-bold text-[#7A1F3D] shadow-sm">
+            <motion.div
+              className="mb-6 inline-flex rounded-full border border-[#FADADD] bg-white/70 px-5 py-2 text-sm font-bold text-[#7A1F3D] shadow-sm"
+              animate={{
+                boxShadow: [
+                  "0 0 0 rgba(183,62,90,0)",
+                  "0 0 28px rgba(183,62,90,0.25)",
+                  "0 0 0 rgba(183,62,90,0)",
+                ],
+              }}
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               Newest Release
-            </div>
+            </motion.div>
 
             <h1 className="font-serif text-5xl font-bold leading-tight text-[#4B2338] md:text-7xl">
               How to Get Your Husband&apos;s Attention
@@ -117,7 +206,7 @@ export default function Home() {
               {["Love", "Communication", "Connection"].map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-[#FADADD] bg-white/70 p-4 text-center shadow-sm"
+                  className="rounded-2xl border border-[#FADADD] bg-white/70 p-4 text-center shadow-sm backdrop-blur-sm"
                 >
                   <p className="font-bold text-[#4B2338]">{item}</p>
                 </div>
@@ -128,8 +217,10 @@ export default function Home() {
       </section>
 
       {/* DISCOVER */}
-      <section className="px-5 py-20">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative overflow-hidden px-5 py-20">
+        <FloatingRomanceBackground />
+
+        <div className="relative mx-auto max-w-7xl">
           <div className="grid items-end gap-8 md:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="mb-3 font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
@@ -152,9 +243,11 @@ export default function Home() {
               const Icon = item.icon;
 
               return (
-                <div
+                <motion.div
                   key={item.title}
-                  className="rounded-[2rem] border border-[#FADADD] bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                  className="rounded-[2rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm transition hover:shadow-xl"
                 >
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FADADD] text-[#7A1F3D]">
                     <Icon size={26} />
@@ -165,7 +258,7 @@ export default function Home() {
                   </h3>
 
                   <p className="mt-4 leading-7 text-[#5c4a50]">{item.text}</p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -199,23 +292,31 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 bg-[#7A1F3D]/30 p-6">
-            {["Romance", "Trust", "Growth", "Wisdom"].map((item) => (
-              <div
+            {["Romance", "Trust", "Growth", "Wisdom"].map((item, index) => (
+              <motion.div
                 key={item}
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 4 + index,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="flex min-h-40 items-center justify-center rounded-[2rem] border border-white/10 bg-white/10 p-6 text-center"
               >
                 <p className="font-serif text-3xl font-bold text-white">
                   {item}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-5 py-20">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative overflow-hidden px-5 py-20">
+        <FloatingRomanceBackground />
+
+        <div className="relative mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="mb-3 font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
@@ -237,9 +338,10 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((quote) => (
-              <div
+              <motion.div
                 key={quote}
-                className="rounded-[2rem] border border-[#FADADD] bg-white p-8 shadow-sm"
+                whileHover={{ y: -8 }}
+                className="rounded-[2rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm"
               >
                 <div className="mb-5 flex gap-1 text-[#B73E5A]">
                   {[...Array(5)].map((_, index) => (
@@ -250,7 +352,7 @@ export default function Home() {
                 <p className="leading-7 text-[#5c4a50]">“{quote}”</p>
 
                 <p className="mt-6 font-bold text-[#4B2338]">Reader</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -273,7 +375,21 @@ export default function Home() {
               below and it may be featured on the website after approval.
             </p>
 
-            <div className="mt-8 rounded-[2rem] bg-[#FFF7F2] p-6">
+            <motion.div
+              className="mt-8 rounded-[2rem] bg-[#FFF7F2] p-6"
+              animate={{
+                boxShadow: [
+                  "0 0 0 rgba(250,218,221,0)",
+                  "0 0 30px rgba(250,218,221,0.9)",
+                  "0 0 0 rgba(250,218,221,0)",
+                ],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               <div className="mb-3 flex gap-1 text-[#B73E5A]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={20} fill="currentColor" />
@@ -284,7 +400,7 @@ export default function Home() {
                 “The most powerful reviews often come from readers whose lives
                 were genuinely impacted.”
               </p>
-            </div>
+            </motion.div>
           </div>
 
           <div className="rounded-[2.5rem] border border-[#FADADD] bg-white p-6 shadow-xl md:p-8">
@@ -343,8 +459,10 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="px-5 py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 rounded-[2.5rem] border border-[#FADADD] bg-white p-8 shadow-sm md:grid-cols-[1fr_auto] md:p-12">
+      <section className="relative overflow-hidden px-5 py-20">
+        <FloatingRomanceBackground />
+
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 rounded-[2.5rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm md:grid-cols-[1fr_auto] md:p-12">
           <div>
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#FADADD] px-4 py-2 text-sm font-bold text-[#7A1F3D]">
               <BookOpen size={17} />
