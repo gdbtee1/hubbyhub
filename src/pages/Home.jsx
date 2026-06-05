@@ -9,6 +9,8 @@ import {
   ArrowRight,
   Star,
   Send,
+  Quote,
+  PenLine,
 } from "lucide-react";
 
 import bookCover from "../assets/bookcover.JPG";
@@ -18,21 +20,33 @@ const buyLink =
 
 const reviewFormLink = "https://formspree.io/f/YOUR_FORM_ID";
 
+const heroWoman =
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80";
+
+const happyCouple =
+  "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1600&q=80";
+
+const coupleReading =
+  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80";
+
+const smilingWoman =
+  "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80";
+
 const discoveries = [
   {
     icon: Heart,
-    title: "Emotional Connection",
-    text: "Understand what creates closeness, attention, and deeper love at home.",
+    title: "Feel Seen Again",
+    text: "Guidance for women who want deeper attention, affection, and emotional closeness.",
   },
   {
     icon: MessageCircle,
-    title: "Better Communication",
-    text: "Learn how to approach conversations with clarity, softness, and confidence.",
+    title: "Speak With Soft Power",
+    text: "Learn how to communicate without losing your calm, confidence, or self-respect.",
   },
   {
     icon: Sparkles,
-    title: "Romance That Feels Real",
-    text: "Bring back affection, attention, and meaningful moments without forcing it.",
+    title: "Bring Romance Back",
+    text: "Simple relationship wisdom that helps love feel intentional again.",
   },
 ];
 
@@ -42,68 +56,42 @@ const testimonials = [
   "A beautiful reminder that love needs attention, patience, and wisdom.",
 ];
 
-const floatingDecor = [
-  { icon: Heart, className: "left-[6%] top-24", delay: 0 },
-  { icon: Sparkles, className: "left-[18%] top-[60%]", delay: 0.7 },
-  { icon: Heart, className: "right-[8%] top-32", delay: 1.1 },
-  { icon: Sparkles, className: "right-[18%] bottom-28", delay: 1.5 },
-  { icon: Heart, className: "left-[45%] bottom-16", delay: 2 },
+const floatingItems = [
+  { icon: Heart, className: "left-[6%] top-[16%]", delay: 0 },
+  { icon: Sparkles, className: "right-[8%] top-[18%]", delay: 0.5 },
+  { icon: Heart, className: "left-[12%] bottom-[18%]", delay: 1 },
+  { icon: Sparkles, className: "right-[18%] bottom-[22%]", delay: 1.5 },
 ];
 
-function FloatingRomanceBackground() {
+function FloatingDecor() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {floatingDecor.map((item, index) => {
+      <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-[#FADADD]/60 blur-3xl" />
+      <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#D97A8A]/30 blur-3xl" />
+
+      {floatingItems.map((item, index) => {
         const Icon = item.icon;
 
         return (
           <motion.div
             key={index}
-            className={`absolute hidden rounded-full border border-[#FADADD]/70 bg-white/50 p-3 text-[#B73E5A] shadow-lg shadow-[#FADADD]/30 backdrop-blur-sm sm:block ${item.className}`}
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            className={`absolute hidden rounded-full border border-[#FADADD] bg-white/70 p-3 text-[#B73E5A] shadow-lg backdrop-blur sm:block ${item.className}`}
             animate={{
-              opacity: [0.25, 0.8, 0.25],
               y: [0, -22, 0],
-              rotate: [0, 8, -5, 0],
-              scale: [0.9, 1.08, 0.9],
+              rotate: [0, 10, -8, 0],
+              opacity: [0.35, 1, 0.35],
             }}
             transition={{
-              duration: 6,
+              duration: 5,
               delay: item.delay,
               repeat: Infinity,
               ease: "easeInOut",
             }}
           >
-            <Icon size={18} fill="currentColor" />
+            <Icon size={20} fill="currentColor" />
           </motion.div>
         );
       })}
-
-      <motion.div
-        className="absolute left-1/2 top-10 h-32 w-32 rounded-full bg-[#FADADD]/30 blur-3xl"
-        animate={{
-          scale: [1, 1.35, 1],
-          opacity: [0.4, 0.85, 0.4],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      <motion.div
-        className="absolute bottom-12 right-1/4 h-40 w-40 rounded-full bg-[#E8A1B3]/25 blur-3xl"
-        animate={{
-          scale: [1, 1.25, 1],
-          opacity: [0.35, 0.7, 0.35],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
     </div>
   );
 }
@@ -111,384 +99,435 @@ function FloatingRomanceBackground() {
 export default function Home() {
   return (
     <Layout>
-      {/* HERO / NEWEST RELEASE */}
-      <section className="relative overflow-hidden px-5 py-20 lg:py-28">
-        <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-[#FADADD]/50 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#E8A1B3]/40 blur-3xl" />
-        <FloatingRomanceBackground />
+      <main className="relative overflow-hidden bg-[#FFF7F2]">
+        {/* HERO */}
+        <section className="relative overflow-hidden px-5 py-16 lg:py-24">
+          <FloatingDecor />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="order-1 flex justify-center lg:order-1"
-          >
+          <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div
-              className="relative w-full max-w-sm"
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10"
             >
-              <div className="absolute inset-0 rounded-[2rem] bg-[#7A1F3D]/20 blur-3xl" />
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FADADD] bg-white/80 px-5 py-2 text-sm font-bold text-[#7A1F3D] shadow-sm backdrop-blur">
+                <Sparkles size={16} />
+                New Relationship Release
+              </div>
 
-              <div className="relative rounded-[2rem] border border-[#FADADD] bg-white p-4 shadow-2xl">
+              <h1 className="max-w-4xl font-serif text-5xl font-bold leading-[0.95] text-[#4B2338] sm:text-6xl lg:text-8xl">
+                Get his attention without losing yourself.
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-[#B73E5A]">
+                A soft but powerful guide for women who want more connection,
+                communication, romance, and emotional presence at home.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+                <a
+                  href={buyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#7A1F3D] px-8 py-4 font-bold text-white shadow-xl shadow-[#7A1F3D]/20 transition hover:-translate-y-1 hover:bg-[#4B2338]"
+                >
+                  Buy the Book <ArrowRight size={18} />
+                </a>
+
+                <Link
+                  to="/book"
+                  className="inline-flex items-center justify-center rounded-full border border-[#D97A8A] bg-white/80 px-8 py-4 font-bold text-[#7A1F3D] transition hover:-translate-y-1 hover:bg-[#FADADD]"
+                >
+                  Read Description
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, rotate: 2 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative mx-auto w-full max-w-lg"
+            >
+              <div className="absolute -inset-6 rounded-[3rem] bg-[#D97A8A]/20 blur-3xl" />
+
+              <img
+                src={heroWoman}
+                alt="Confident smiling woman"
+                className="h-[620px] w-full rounded-[3rem] object-cover shadow-2xl"
+              />
+
+              <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-t from-[#4B2338]/55 via-transparent to-transparent" />
+
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-8 -left-3 w-44 rounded-[2rem] bg-white p-3 shadow-2xl sm:-left-10 sm:w-56"
+              >
                 <img
                   src={bookCover}
                   alt="How to Get Your Husband's Attention book cover"
-                  className="aspect-[3/4] w-full rounded-[1.5rem] object-cover"
+                  className="w-full rounded-[1.5rem] object-cover"
                 />
-              </div>
-            </motion.div>
-          </motion.div>
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="order-2 lg:order-2"
-          >
-            <motion.div
-              className="mb-6 inline-flex rounded-full border border-[#FADADD] bg-white/70 px-5 py-2 text-sm font-bold text-[#7A1F3D] shadow-sm"
-              animate={{
-                boxShadow: [
-                  "0 0 0 rgba(183,62,90,0)",
-                  "0 0 28px rgba(183,62,90,0.25)",
-                  "0 0 0 rgba(183,62,90,0)",
-                ],
-              }}
-              transition={{
-                duration: 3.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              Newest Release
-            </motion.div>
-
-            <h1 className="font-serif text-5xl font-bold leading-tight text-[#4B2338] md:text-7xl">
-              How to Get Your Husband&apos;s Attention
-            </h1>
-
-            <p className="mt-6 max-w-xl text-xl font-semibold text-[#B73E5A]">
-              A Woman&apos;s Guide to Reconnection, Communication, and Lasting
-              Love
-            </p>
-
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#5c4a50]">
-              Romance, wisdom, and real relationship guidance for women who want
-              stronger communication, deeper emotional connection, and more love
-              at home.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <a
-                href={buyLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-[#7A1F3D] px-8 py-4 font-semibold text-white shadow-lg shadow-[#7A1F3D]/20 transition hover:bg-[#4B2338]"
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -right-2 top-8 max-w-[12rem] rounded-3xl border border-[#FADADD] bg-white/90 p-4 shadow-xl backdrop-blur sm:-right-8"
               >
-                Buy Now
-              </a>
-
-              <Link
-                to="/book"
-                className="inline-flex items-center justify-center rounded-full border border-[#D97A8A] bg-white/70 px-8 py-4 font-semibold text-[#7A1F3D] transition hover:bg-[#FADADD]"
-              >
-                Description
-              </Link>
-            </div>
-
-            <div className="mt-10 grid max-w-xl gap-4 sm:grid-cols-3">
-              {["Love", "Communication", "Connection"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-[#FADADD] bg-white/70 p-4 text-center shadow-sm backdrop-blur-sm"
-                >
-                  <p className="font-bold text-[#4B2338]">{item}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* DISCOVER */}
-      <section className="relative overflow-hidden px-5 py-20">
-        <FloatingRomanceBackground />
-
-        <div className="relative mx-auto max-w-7xl">
-          <div className="grid items-end gap-8 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="mb-3 font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
-                Inside the Message
-              </p>
-
-              <h2 className="font-serif text-4xl font-bold text-[#4B2338] md:text-5xl">
-                Relationship wisdom that feels honest, warm, and practical.
-              </h2>
-            </div>
-
-            <p className="text-lg leading-8 text-[#5c4a50]">
-              Hubby Hub is built around guidance that helps women reflect,
-              reconnect, and move with more confidence in love and marriage.
-            </p>
+                <p className="font-serif text-xl font-bold text-[#4B2338]">
+                  Love needs attention.
+                </p>
+                <p className="mt-1 text-sm text-[#5c4a50]">
+                  Not pressure. Understanding.
+                </p>
+              </motion.div>
+            </motion.div>
           </div>
+        </section>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {discoveries.map((item) => {
+        {/* IMAGE BANNER */}
+        <section className="px-5 py-20">
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[3rem] shadow-2xl">
+            <img
+              src={happyCouple}
+              alt="Happy couple together"
+              className="h-[620px] w-full object-cover"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-r from-[#4B2338]/95 via-[#4B2338]/55 to-transparent" />
+
+            <div className="absolute inset-0 flex items-center p-8 sm:p-12">
+              <div className="max-w-2xl text-white">
+                <p className="font-bold uppercase tracking-[0.2em] text-[#FADADD]">
+                  Relationship Wisdom
+                </p>
+
+                <h2 className="mt-4 font-serif text-4xl font-bold leading-tight sm:text-6xl">
+                  Strong relationships are built intentionally.
+                </h2>
+
+                <p className="mt-6 text-lg leading-8 text-[#FADADD]">
+                  Hubby Hub helps women understand communication, attention,
+                  romance, and emotional presence in a way that feels warm,
+                  practical, and real.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* LOVE NOTES */}
+        <section className="px-5 py-14">
+          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+            {discoveries.map((item, index) => {
               const Icon = item.icon;
 
               return (
                 <motion.div
                   key={item.title}
-                  whileHover={{ y: -8, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                  className="rounded-[2rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm transition hover:shadow-xl"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 }}
+                  whileHover={{ y: -8, rotate: index === 1 ? 1 : -1 }}
+                  className="relative overflow-hidden rounded-[2rem] border border-[#FADADD] bg-white p-8 shadow-sm"
                 >
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FADADD] text-[#7A1F3D]">
-                    <Icon size={26} />
+                  <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#FADADD]/60 blur-2xl" />
+                  <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FADADD] text-[#7A1F3D]">
+                    <Icon size={26} fill="currentColor" />
                   </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-[#4B2338]">
+                  <h3 className="relative font-serif text-2xl font-bold text-[#4B2338]">
                     {item.title}
                   </h3>
 
-                  <p className="mt-4 leading-7 text-[#5c4a50]">{item.text}</p>
+                  <p className="relative mt-4 leading-7 text-[#5c4a50]">
+                    {item.text}
+                  </p>
                 </motion.div>
               );
             })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* BRAND SECTION */}
-      <section className="px-5 py-20">
-        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2.5rem] bg-[#4B2338] md:grid-cols-2">
-          <div className="p-10 text-white md:p-14">
-            <p className="mb-4 font-bold uppercase tracking-[0.2em] text-[#FADADD]">
-              Why Hubby Hub Exists
-            </p>
+        {/* WOMAN SECTION */}
+        <section className="px-5 py-24">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+            <div className="overflow-hidden rounded-[3rem] shadow-2xl">
+              <img
+                src={smilingWoman}
+                alt="Happy woman smiling"
+                className="h-[650px] w-full object-cover"
+              />
+            </div>
 
-            <h2 className="font-serif text-4xl font-bold leading-tight md:text-5xl">
-              Every relationship deserves attention, growth, and care.
-            </h2>
+            <div>
+              <p className="font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
+                For Women
+              </p>
 
-            <p className="mt-6 text-lg leading-8 text-[#FADADD]">
-              Hubby Hub is an anonymous romance and relationship writing brand
-              created to help women navigate love, communication, and emotional
-              connection with wisdom from the heart.
-            </p>
+              <h2 className="mt-4 font-serif text-5xl font-bold leading-tight text-[#4B2338]">
+                Feel confident in love without losing yourself.
+              </h2>
 
-            <Link
-              to="/about"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFF7F2] px-7 py-4 font-bold text-[#7A1F3D]"
-            >
-              About Hubby Hub <ArrowRight size={18} />
-            </Link>
+              <p className="mt-6 text-lg leading-8 text-[#5c4a50]">
+                This book is for the woman who wants attention, connection, and
+                emotional presence — but also wants to move with wisdom,
+                softness, and self-respect.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {["Confidence", "Connection", "Communication", "Romance"].map(
+                  (item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-[#FADADD] bg-white p-5 shadow-sm"
+                    >
+                      <p className="font-serif text-2xl font-bold text-[#4B2338]">
+                        {item}
+                      </p>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-2 gap-4 bg-[#7A1F3D]/30 p-6">
-            {["Romance", "Trust", "Growth", "Wisdom"].map((item, index) => (
-              <motion.div
-                key={item}
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 4 + index,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="flex min-h-40 items-center justify-center rounded-[2rem] border border-white/10 bg-white/10 p-6 text-center"
-              >
-                <p className="font-serif text-3xl font-bold text-white">
-                  {item}
+        {/* GRAPHIC SPLIT SECTION */}
+        <section className="px-5 py-20">
+          <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[3rem] bg-[#4B2338] shadow-2xl lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative min-h-[28rem] overflow-hidden p-8 text-white sm:p-12">
+              <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#FADADD]/20 blur-3xl" />
+              <div className="absolute bottom-10 right-10 h-52 w-52 rounded-full bg-[#D97A8A]/20 blur-3xl" />
+
+              <div className="relative">
+                <p className="mb-4 font-bold uppercase tracking-[0.2em] text-[#FADADD]">
+                  The Heart of the Book
                 </p>
-              </motion.div>
-            ))}
+
+                <h2 className="font-serif text-4xl font-bold leading-tight sm:text-5xl">
+                  For the woman who wants to feel loved, chosen, and understood.
+                </h2>
+
+                <p className="mt-6 max-w-xl text-lg leading-8 text-[#FADADD]">
+                  Hubby Hub turns relationship lessons into soft, practical
+                  guidance that helps women move with wisdom instead of worry.
+                </p>
+
+                <Link
+                  to="/about"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-bold text-[#7A1F3D]"
+                >
+                  About Hubby Hub <ArrowRight size={18} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 bg-[#7A1F3D]/40 p-5 sm:gap-4 sm:p-8">
+              {["Romance", "Wisdom", "Marriage", "Connection"].map(
+                (item, index) => (
+                  <motion.div
+                    key={item}
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{
+                      duration: 4 + index,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="flex min-h-36 items-center justify-center rounded-[2rem] border border-white/10 bg-white/10 p-5 text-center backdrop-blur"
+                  >
+                    <p className="font-serif text-2xl font-bold text-white sm:text-3xl">
+                      {item}
+                    </p>
+                  </motion.div>
+                )
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* TESTIMONIALS */}
-      <section className="relative overflow-hidden px-5 py-20">
-        <FloatingRomanceBackground />
+        {/* IMAGE MOSAIC */}
+        <section className="px-5 py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-3xl">
+              <p className="font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
+                Love In Real Life
+              </p>
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <h2 className="mt-4 font-serif text-5xl font-bold text-[#4B2338]">
+                A brand that feels emotional, feminine, and premium.
+              </h2>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              <img
+                src={coupleReading}
+                alt="Woman portrait"
+                className="h-[520px] w-full rounded-[3rem] object-cover shadow-xl"
+              />
+
+              <img
+                src={happyCouple}
+                alt="Happy couple"
+                className="h-[520px] w-full rounded-[3rem] object-cover shadow-xl md:mt-16"
+              />
+
+              <img
+                src={smilingWoman}
+                alt="Smiling woman"
+                className="h-[520px] w-full rounded-[3rem] object-cover shadow-xl"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* QUOTE BANNER */}
+        <section className="px-5 py-10">
+          <div className="mx-auto max-w-7xl rounded-[3rem] border border-[#FADADD] bg-white p-8 shadow-sm sm:p-12">
+            <Quote className="mb-5 text-[#B73E5A]" size={42} />
+            <h2 className="max-w-5xl font-serif text-4xl font-bold leading-tight text-[#4B2338] sm:text-5xl">
+              “Sometimes the attention you want starts with the conversation
+              you have been afraid to begin.”
+            </h2>
+            <p className="mt-6 font-bold text-[#B73E5A]">— Hubby Hub</p>
+          </div>
+        </section>
+
+        {/* REVIEWS + FORM */}
+        <section className="px-5 py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="mb-3 font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
                 Reader Response
               </p>
 
-              <h2 className="font-serif text-4xl font-bold text-[#4B2338] md:text-5xl">
-                Words from the heart.
+              <h2 className="font-serif text-4xl font-bold text-[#4B2338] sm:text-5xl">
+                Let readers feel the emotion before they buy.
               </h2>
-            </div>
 
-            <Link
-              to="/book"
-              className="inline-flex items-center gap-2 font-bold text-[#7A1F3D]"
-            >
-              View the Book <ArrowRight size={18} />
-            </Link>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((quote) => (
-              <motion.div
-                key={quote}
-                whileHover={{ y: -8 }}
-                className="rounded-[2rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm"
-              >
-                <div className="mb-5 flex gap-1 text-[#B73E5A]">
-                  {[...Array(5)].map((_, index) => (
-                    <Star key={index} size={18} fill="currentColor" />
-                  ))}
-                </div>
-
-                <p className="leading-7 text-[#5c4a50]">“{quote}”</p>
-
-                <p className="mt-6 font-bold text-[#4B2338]">Reader</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SUBMIT REVIEW */}
-      <section className="px-5 py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="mb-3 font-bold uppercase tracking-[0.2em] text-[#B73E5A]">
-              Submit Your Review
-            </p>
-
-            <h2 className="font-serif text-4xl font-bold text-[#4B2338] md:text-5xl">
-              Share what the book meant to you.
-            </h2>
-
-            <p className="mt-6 text-lg leading-8 text-[#5c4a50]">
-              Reader reviews help others discover Hubby Hub. Submit your review
-              below and it may be featured on the website after approval.
-            </p>
-
-            <motion.div
-              className="mt-8 rounded-[2rem] bg-[#FFF7F2] p-6"
-              animate={{
-                boxShadow: [
-                  "0 0 0 rgba(250,218,221,0)",
-                  "0 0 30px rgba(250,218,221,0.9)",
-                  "0 0 0 rgba(250,218,221,0)",
-                ],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div className="mb-3 flex gap-1 text-[#B73E5A]">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={20} fill="currentColor" />
+              <div className="mt-8 space-y-5">
+                {testimonials.map((quote) => (
+                  <div
+                    key={quote}
+                    className="rounded-[2rem] border border-[#FADADD] bg-white p-6 shadow-sm"
+                  >
+                    <div className="mb-3 flex gap-1 text-[#B73E5A]">
+                      {[...Array(5)].map((_, index) => (
+                        <Star key={index} size={17} fill="currentColor" />
+                      ))}
+                    </div>
+                    <p className="leading-7 text-[#5c4a50]">“{quote}”</p>
+                  </div>
                 ))}
               </div>
+            </div>
 
-              <p className="italic text-[#5c4a50]">
-                “The most powerful reviews often come from readers whose lives
-                were genuinely impacted.”
-              </p>
-            </motion.div>
+            <div className="rounded-[3rem] bg-gradient-to-br from-[#FADADD] via-[#FFF7F2] to-[#D97A8A] p-[2px] shadow-xl">
+              <div className="rounded-[2.85rem] bg-white p-6 sm:p-8">
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FADADD] text-[#7A1F3D]">
+                    <PenLine size={22} />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-[#4B2338]">
+                      Submit Your Review
+                    </h3>
+                    <p className="text-sm text-[#5c4a50]">
+                      Reviews may be featured after approval.
+                    </p>
+                  </div>
+                </div>
+
+                <form action={reviewFormLink} method="POST" className="space-y-4">
+                  <input
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Your Name"
+                    className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
+                  />
+
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Your Email"
+                    className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
+                  />
+
+                  <select
+                    name="rating"
+                    required
+                    className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
+                  >
+                    <option value="">Choose a Rating</option>
+                    <option value="5 Stars">★★★★★ 5 Stars</option>
+                    <option value="4 Stars">★★★★ 4 Stars</option>
+                    <option value="3 Stars">★★★ 3 Stars</option>
+                    <option value="2 Stars">★★ 2 Stars</option>
+                    <option value="1 Star">★ 1 Star</option>
+                  </select>
+
+                  <textarea
+                    name="review"
+                    rows={5}
+                    required
+                    placeholder="Write your review..."
+                    className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
+                  />
+
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7A1F3D] px-8 py-4 font-bold text-white transition hover:bg-[#4B2338] sm:w-fit"
+                  >
+                    Submit Review <Send size={17} />
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="rounded-[2.5rem] border border-[#FADADD] bg-white p-6 shadow-xl md:p-8">
-            <form action={reviewFormLink} method="POST" className="space-y-4">
-              <input
-                name="name"
-                type="text"
-                required
-                placeholder="Your Name"
-                className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
-              />
+        {/* FINAL CTA */}
+        <section className="relative px-5 py-24">
+          <img
+            src={happyCouple}
+            alt="Happy couple"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
 
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Your Email"
-                className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
-              />
+          <div className="absolute inset-0 bg-[#4B2338]/85" />
 
-              <select
-                name="rating"
-                required
-                className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
-              >
-                <option value="">Choose a Rating</option>
-                <option value="5 Stars">★★★★★ 5 Stars</option>
-                <option value="4 Stars">★★★★ 4 Stars</option>
-                <option value="3 Stars">★★★ 3 Stars</option>
-                <option value="2 Stars">★★ 2 Stars</option>
-                <option value="1 Star">★ 1 Star</option>
-              </select>
-
-              <textarea
-                name="review"
-                rows={5}
-                required
-                placeholder="Write your review..."
-                className="w-full rounded-2xl border border-[#FADADD] p-4 outline-none focus:border-[#7A1F3D]"
-              />
-
-              <button
-                type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7A1F3D] px-8 py-4 font-bold text-white transition hover:bg-[#4B2338] sm:w-fit"
-              >
-                Submit Review <Send size={17} />
-              </button>
-            </form>
-
-            <p className="mt-5 text-sm leading-6 text-[#5c4a50]">
-              Reviews are reviewed before being published to keep the Hubby Hub
-              community thoughtful and respectful.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="relative overflow-hidden px-5 py-20">
-        <FloatingRomanceBackground />
-
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 rounded-[2.5rem] border border-[#FADADD] bg-white/90 p-8 shadow-sm backdrop-blur-sm md:grid-cols-[1fr_auto] md:p-12">
-          <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#FADADD] px-4 py-2 text-sm font-bold text-[#7A1F3D]">
+          <div className="relative mx-auto max-w-4xl text-center text-white">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-[#FADADD]">
               <BookOpen size={17} />
               Start with the newest release
             </div>
 
-            <h2 className="font-serif text-4xl font-bold text-[#4B2338]">
-              Ready to bring more attention and connection back home?
+            <h2 className="font-serif text-5xl font-bold leading-tight sm:text-6xl">
+              Start your journey toward deeper connection.
             </h2>
 
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-[#5c4a50]">
-              Explore the book and discover relationship insight created to feel
-              warm, practical, and easy to apply.
+            <p className="mt-6 text-xl leading-8 text-[#FADADD]">
+              Discover relationship insight created to help women understand
+              communication, attention, and lasting love.
             </p>
-          </div>
 
-          <a
-            href={buyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-[#7A1F3D] px-8 py-4 text-center font-bold text-white transition hover:bg-[#4B2338]"
-          >
-            Buy Now
-          </a>
-        </div>
-      </section>
+            <a
+              href={buyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-10 inline-flex rounded-full bg-white px-10 py-5 font-bold text-[#7A1F3D] transition hover:bg-[#FADADD]"
+            >
+              Buy Now
+            </a>
+          </div>
+        </section>
+      </main>
     </Layout>
   );
 }

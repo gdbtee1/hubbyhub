@@ -23,13 +23,39 @@ export default function Footer() {
           </div>
         </div>
 
-        <div>
-          <h3 className="mb-4 font-bold">Stay Connected</h3>
-          <p className="text-sm leading-6 text-[#FADADD]">
-            Join the Hubby Hub community for love, wisdom, relationship insight,
-            and updates on new releases.
-          </p>
-        </div>
+      <div>
+  <h3 className="mb-4 font-bold">Future Releases</h3>
+
+  <p className="mb-5 text-sm leading-6 text-[#FADADD]">
+    Subscribe to receive updates on new book releases, relationship insights,
+    exclusive writing, and future Hubby Hub content delivered directly to your inbox.
+  </p>
+
+  <form
+    action="https://formspree.io/f/PLACEHOLDER_ID"
+    method="POST"
+    className="flex flex-col gap-3 sm:flex-row"
+  >
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="Enter your email"
+      className="w-full rounded-full border border-white/10 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-[#FADADD]/70 focus:outline-none focus:ring-2 focus:ring-[#D97A8A]"
+    />
+
+    <button
+      type="submit"
+      className="rounded-full bg-[#D97A8A] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#B73E5A]"
+    >
+      Subscribe
+    </button>
+  </form>
+
+  <p className="mt-3 text-xs text-[#FADADD]/70">
+    No spam. Unsubscribe anytime.
+  </p>
+</div>
       </div>
 
       <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-[#FADADD]">
